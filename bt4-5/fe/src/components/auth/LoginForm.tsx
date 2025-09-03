@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { api, getErrMsg } from "@/lib/api";
-
+import { useNavigate } from "react-router-dom";
 interface LoginFormProps {
   onSwitchToSignUp: () => void;
   onSwitchToForgotPassword: () => void;
@@ -15,6 +15,7 @@ const LoginForm = ({ onSwitchToSignUp, onSwitchToForgotPassword, onLoginSuccess 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ const LoginForm = ({ onSwitchToSignUp, onSwitchToForgotPassword, onLoginSuccess 
       if (data?.token) localStorage.setItem("token", data.token);
       toast({ title: "Đăng nhập thành công!", description: "Chào mừng bạn quay trở lại" });
       onLoginSuccess();
+      navigate("/home");
     } catch (e) {
       toast({ title: "Đăng nhập thất bại", description: getErrMsg(e), variant: "destructive" });
     } finally {

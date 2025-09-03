@@ -138,8 +138,10 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
   }
   const data = parsed.data;
   const user = await User.findOne({ email: data.email });
+  
   if (!user || !(await user.comparePassword(data.password))) {
-    return res.status(401).json({ message: 'Invalid credentials' });
+    console.log("mật khẩu đăng nhập", data.password, "Mật khẩu trên db: ", user?.password)
+    return res.status(401).json({ message: 'Invalid credentials'});
   }
   if (!user.isVerified) return res.status(403).json({ message: 'Please verify your account via OTP' });
 
@@ -195,7 +197,6 @@ export const resetPasswordWithOtp = asyncHandler(async (req: Request, res: Respo
     await user.save({ validateBeforeSave: false });
     return res.status(400).json({ message: 'OTP incorrect' });
   }
-
   await user.setPassword(newPassword);
   user.resetOtpHash = null;
   user.resetOtpExpires = null;

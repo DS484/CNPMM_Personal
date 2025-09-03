@@ -50,9 +50,7 @@ UserSchema.methods.comparePassword = function (candidate: string) {
 };
 
 UserSchema.methods.setPassword = async function (newPass: string) {
-  const salt = await bcrypt.genSalt(10);
-  // @ts-ignore
-  this.password = await bcrypt.hash(newPass, salt);
+  this.password = newPass;
 };
 
 export default mongoose.model<IUser>('User', UserSchema);
