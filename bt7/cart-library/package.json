@@ -1,5 +1,5 @@
 {
-  "name": "cart-library",
+  "name": "cart-library-ds404",
   "version": "1.0.0",
   "description": "A library for shopping cart functionality with standardized components.",
   "main": "dist/index.js",

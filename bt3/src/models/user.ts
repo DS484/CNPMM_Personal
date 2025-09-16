@@ -9,7 +9,7 @@ export interface UserAttributes {
   gender: 'Male' | 'Female' | 'Other';
 }
 
-export interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'address'> {}
+export interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'address'> { }
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: number;
